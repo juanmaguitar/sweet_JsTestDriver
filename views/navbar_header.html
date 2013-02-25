@@ -1,0 +1,27 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="#">{{ title }}</a>
+      <div class="nav-collapse collapse">
+        <form class="navbar-form pull-right">
+          <select name="conf">
+          {% for file in config.configFiles %}
+            {% if file == config.configFile %}
+              {% set selected = "selected=selected" %}
+            {% else %}
+              {% set selected = "" %}
+            {% endif %}  
+             <option {{ selected }} value="{{ file }}">{{ loop.key }}</option>   
+          {% endfor %}
+          <select>
+          <button type="submit" class="btn">Launch all tests</button>
+        </form>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>

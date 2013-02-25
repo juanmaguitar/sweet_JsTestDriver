@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+  
+  <!-- Main hero unit for a primary marketing message or call to action -->
+  <div class="hero-unit">
+  
+  <ol>
+    {% for result in results %}
+    
+      {% set testsuite_class = "ok" %}
+      {% set open_attr = false %}
+      
+      {% if ( result.testsuite.$.failures != 0 || result.testsuite.$.failures != 0 ) %}   
+        {% set testsuite_class = "ko" %}
+        {% set open_attr = true %}
+      {% endif %}
+      
+      <li class="{{ testsuite_class }}">
+        <details {% if open_attr %}open{% endif %}>
+            <summary>
+              <a class="{{ testsuite_class }}" href="results?conf={{ config.configFile }}&tests={{ loop.key }}">{{ loop.key }}</a>
+              <em>({{ result.testsuite.$.tests }} tests)</em>
+            </summary>
+            <ul>
+            {% for test in result.testsuite.testcase %}          
+              
+              
+              <!--
+              <li><p>:: {{ test|json_encode }} ::</p></li>
+              <li><p>:: {{ test.failure[0]|json_encode }} ::</p></li>
+              -->
+              
+              {% if ( not test.failure[0] ) %}
+                <li >
+                  <a class="ok" href="results?tests={{ test.$.name }}">{{ test.$.name }}</a>
+                </li>
+              {% else %}                
+                {% set msg = test.failure[0].$.message|getMsg %}
+                <li >
+                  <a class="ko" href="results??conf={{ config.configFile }}&tests={{ test.$.name }}">{{ test.$.name }}</a>
+                  <div class="error_msg">
+                    <h3>{{ msg.name }}</h3>
+                    <h4>{{ msg.message }}</h3>
+                    <pre>
+                      <code>{{ msg.stack}}</code>
+                    </pre>
+                  </div>
+                </li>
+              {% endif %}
+            {% endfor %}
+        </details>
+
+      </li>
+      
+    {% endfor %}
+  </ol>
+</div> 
+{% endblock %}

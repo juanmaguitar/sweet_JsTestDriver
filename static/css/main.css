@@ -1,0 +1,16 @@
+body { font-size:1.1em;}
+ul { margin:0; }
+ul ul { padding:5px 20px; list-style-type: circle; }
+ul li, ol li  { margin:5px 0; line-height:24px; }
+ol li.ko { margin-top:20px;}
+details ul li:last-child { margin-bottom:20px; }
+details ul { margin-left:40px; }
+summary { font-size:1.2em; }
+
+summary a.ko { color:rgb(172, 43, 22);  }
+a.ko { color:rgb(251,76,47);  }
+summary a.ok  { color:rgb(22,167,102); }
+a.ok { color:rgb(67,214,146); }
+
+code { word-wrap: break-word; font-weight:normal; font-size:16px; color:#0D0D0D; margin:10px; padding:10px 20px; display:block; border:2px solid red; }
+.error_msg { margin:10px 0 10px -40px; }    
